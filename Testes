@@ -1,0 +1,57 @@
+
+import abc
+from unittest import TestCase, main, result
+
+
+class Calculadora(object):
+    def calcular(self, valor1, valor2, operador):
+        operacaoFabrica = OperadorFabrica()
+        operacao = operacaoFabrica.criar(operador)
+        if(operacao == None):
+            return 0
+        else: 
+            resultado = operacao.executar(valor1, valor1)
+            return resultado
+
+class OperadorFabrica(object):
+    def criar(self, operador):
+        if(operador == "soma"):
+            return Soma()
+        elif (operador == "divisao"):
+            return Divisao()  
+        elif (operador == "multiplicacao"):
+            return Multiplicacao() 
+        elif (operador == "subtracao"):
+            return Subtracao()
+
+class operacao():
+
+    @abc.abstractmethod
+    def executar(self, valor1, valor2):
+        pass  
+
+class Soma (operacao):
+    def executar(self, v1, v2):
+        resultado = v1 + v2
+       
+class Divisao (operacao):
+    def executar(self, v1, v2):
+        resultado = v1 + v2
+
+class Multiplicacao (operacao):
+    def executar(self, v1, v2):
+        resultado = v1 + v2
+
+class Subtracao (operacao):
+    def executar(self, v1, v2):
+        resultado = v1 + v2
+
+class Testar(TestCase):
+    def testar_soma(self):
+        calculador = Calculadora()
+        resultado = calculador.calcular(2,3, 'soma')
+        return resultado
+
+
+if __name__ == '__main__':
+    main()
